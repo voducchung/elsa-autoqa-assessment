@@ -1,7 +1,5 @@
 name: Regression Tests
 on:
-  push:
-    branches: [ main ]
   pull_request:
     branches: [ main ]
 jobs:
@@ -18,7 +16,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test
+      run: TEST_EMAIL=${{ env.TEST_EMAIL }} npx playwright test
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
