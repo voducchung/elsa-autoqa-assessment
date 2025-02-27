@@ -1,4 +1,4 @@
-name: Speech Analyzer Regression Tests
+name: Regression Tests
 on:
   push:
     branches: [ main ]

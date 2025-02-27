@@ -1,4 +1,4 @@
-name: Speech Analyzer Manually Triggered Tests
+name: Manual Trigger For Browser
 on:
   workflow_dispatch:
     inputs:
