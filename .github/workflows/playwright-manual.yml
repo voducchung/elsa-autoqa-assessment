@@ -1,11 +1,17 @@
-name: Speech Analyzer Regression Tests
+name: Speech Analyzer Manually Triggered Tests
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  workflow_dispatch:
+    inputs:
+      browser:
+        description: 'Browser'
+        type: choice
+        required: true
+        options:
+          - chrome
+          - firefox
+          - webkit
 jobs:
-  tests-on-main:
+  run-selective-tests:
     timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
@@ -18,7 +24,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
     - name: Run Playwright tests
-      run: npx playwright test
+      run: npx playwright test --project=${{ github.event.inputs.browser }}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
