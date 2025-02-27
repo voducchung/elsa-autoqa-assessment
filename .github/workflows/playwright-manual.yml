@@ -25,7 +25,7 @@ jobs:
     - name: Install Playwright Browsers
       run: npx playwright install ${{ github.event.inputs.browser }} --with-deps
     - name: Run Playwright tests
-      run: TEST_EMAIL=${{ env.TEST_EMAIL }} npx playwright test --project=${{ github.event.inputs.browser }}
+      run: TEST_EMAIL=${{ vars.TEST_EMAIL }} npx playwright test --project=${{ github.event.inputs.browser }}
     - uses: actions/upload-artifact@v4
       if: ${{ !cancelled() }}
       with:
