@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "target": "es6", //
+    "module": "NodeNext",
+    "strict": true
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
