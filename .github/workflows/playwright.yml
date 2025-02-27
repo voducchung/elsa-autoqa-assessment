@@ -6,6 +6,7 @@ jobs:
   tests-on-main:
     timeout-minutes: 10
     runs-on: ubuntu-latest
+    environment: qa
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
