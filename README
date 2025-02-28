@@ -1,0 +1,124 @@
+# Test Automation Solution for Assessment
+
+  This solution houses Speech Analyzer automated tests which is built on top of [Playwright](https://playwright.dev/).
+
+## Framework Structure and Design Decisions
+
+### Framework structure
+
+This solution utilizes the **Page Object Model (POM)** design pattern to improve test maintainability and reduce code duplication. The main components are:
+
+* `pages/`: contains page object classes representing either web pages or a web page's components.
+* `tests/`: contains organized automated tests.
+* `utils/`: provides utility/helper functions such as data generation.
+* `settings/`: contains settings for tests and test runs.
+* `playright.config.ts`: Playwright configuration file.
+
+The project's directory structure is organized as follows:
+```
+.
+├── README
+├── package-lock.json                # Records exact dependency versions
+├── package.json                     # Lists project dependencies and scripts
+├── playwright.config.ts             # Playwright configuration
+├── tsconfig.json                    # Configures the TypeScript compiler
+├── .github                          # github configurations
+│   └── workflows                      # CI/CD flows
+│       ├── playwright-manual.yml        # flow triggered manually
+│       └── playwright.yml               # flow auto triggered
+├── pages                            # page object classes
+│   ├── base.page.ts
+│   ├── home                         # home pages and their components
+│   │   └── guest-home.page.ts
+│   ├── signin
+│   │   └── signin.page.ts
+│   ├── signup
+│   │   ├── signup.page.ts
+│   │   └── welcome.modal.ts
+│   └── welcome
+│       └── welcome.page.ts
+├── settings
+│   └── settings.ts                 # tests & test runs configuration
+├── tests                           # organized tests, e.g. e2e, ui, etc.
+│   ├── e2e
+│   │   ├── login.spec.ts
+│   │   └── signup.spec.ts
+│   └── ui
+│       └── .keep
+└── utils                           # utility/helper functions
+    └── test-data.ts
+```
+
+### Design Decisions
+
+*   **Page Object Model:** The framework uses the Page Object Model (POM) to separate test logic from page implementation details. This makes tests more maintainable and easier to understand.
+
+* **Test data:** test data is stored directly in this repository except further requirements. Mock data when applicable should be generated.
+
+*   **Configuration:** Playwright is configured to run tests in headless mode by default for faster execution. The `retries` setting is set to 2 to handle potentially flaky tests. The solution supports multiple browsers: 3 at the moment, can be added more on demand with ease.
+
+*   **Reporting:** The built-in Playwright HTML reporter is used to generate detailed test reports, including screenshots and videos on failure. This helps in debugging and analyzing test results.
+
+* **CI/CD**: utilizes GHA with 2 flows: [1] auto triggered on every PR merge to the `main` branch with default test run settings. [2] manually triggered with choices on a test run.
+
+## Demo Scripts
+
+The `tests/` directory contains two demo test cases: [1] User logs in successfully with an existing account. [2] Guest signs up successfully a new account.
+
+## Installation
+
+1.  **Clone the repository:**
+
+    ```bash
+    # via https
+    git clone https://github.com/voducchung/elsa-autoqa-assessment.git
+    # via ssh
+    git@github.com:<your github username>/elsa-autoqa-assessment.git
+    cd elsa-autoqa-assessment
+    ```
+
+2.  **Install Node.js and npm:**
+
+    Make sure you have Node.js and npm installed. You can download them from [https://nodejs.org/](https://nodejs.org/) or using [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#install--update-script).
+
+3.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+4.  **Install Playwright browsers:**
+
+    ```bash
+    npx playwright install
+    ```
+
+## Usage/Running the Demo Scripts
+
+To run the tests, use the following command:
+
+```bash
+npx playwright test
+```
+The above command will execute all test scripts in the `tests/` directory.
+
+To run a specific spec file, try:
+
+```bash
+npx playwright test <path to the spec file>
+```
+
+After a test run, use the following command to view report:
+```bash
+npx playwright show-report
+```
+
+For more run options, refer to [Playwright help](https://playwright.dev/docs/running-tests#running-tests)
+
+## CI/CD
+
+There are [2 workflows](https://github.com/voducchung/elsa-autoqa-assessment/actions) setup using [GHA](https://github.com/voducchung/elsa-autoqa-assessment/actions).
+
+1. Regression Tests: this workflow is aimed to run regresion tests on a PR to `main` branch.
+
+2. Manual Trigger For Browser: aimed to run tests with more options. At the moment, browser is the only option.
