@@ -119,6 +119,6 @@ For more run options, refer to [Playwright help](https://playwright.dev/docs/run
 
 There are [2 workflows](https://github.com/voducchung/elsa-autoqa-assessment/actions) setup using [GHA](https://github.com/voducchung/elsa-autoqa-assessment/actions).
 
-1. Regression Tests: this workflow is aimed to run regresion tests on a PR merge to `main` branch.
+1. Regression Tests: this workflow is aimed to run regresion tests on a PR to `main` branch.
 
 2. Manual Trigger For Browser: aimed to run tests with more options. At the moment, browser is the only option.
